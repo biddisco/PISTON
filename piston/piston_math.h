@@ -10,7 +10,7 @@
 
 #include <thrust/detail/config.h>
 
-
+/*
 typedef struct float3
 {
   float x, y, z;
@@ -26,7 +26,6 @@ struct uint3
   unsigned int x, y, z;
 };
 
-
 static __inline__ __host__ __device__ float3 make_float3(float x, float y, float z)
 {
   float3 t; t.x = x; t.y = y; t.z = z; return t;
@@ -41,6 +40,7 @@ static __inline__ __host__ __device__ uint3 make_uint3(unsigned int x, unsigned 
 {
   uint3 t; t.x = x; t.y = y; t.z = z; return t;
 }
+*/
 
 #endif
 
