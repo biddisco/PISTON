@@ -25,6 +25,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 #ifndef IMAGE3D_H_
 #define IMAGE3D_H_
 
+#include <thrust/version.h>
 #include <thrust/functional.h>
 #include <thrust/tuple.h>
 #include <thrust/iterator/counting_iterator.h>
@@ -36,11 +37,19 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 #include <mpi.h>
 #endif
 
+#if (THRUST_MAJOR_VERSION>=1) && (THRUST_MINOR_VERSION>=7)
+ #define SPACE thrust::device_system_tag
+#elif (THRUST_MAJOR_VERSION>=1) && (THRUST_MINOR_VERSION>=6)
+ #define SPACE thrust::device_space_tag
+#else
+ #define SPACE thrust::detail::default_device_space_tag
+#endif
+
 namespace piston
 {
 
 // TODO: inherit from image2d?
-template <typename MemorySpace =  thrust::device_space_tag>
+template <typename MemorySpace = thrust::device_system_tag>
 struct image3d
 {
     typedef unsigned IndexType;

@@ -27,6 +27,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
+#include <thrust/version.h>
 
 namespace piston
 {
@@ -35,17 +36,17 @@ namespace detail {
 
 template<typename Iterator,
 	 typename ValueType = typename thrust::iterator_traits<Iterator>::value_type,
-	 typename Space = typename thrust::iterator_space<Iterator>::type>
+	 typename Space = typename thrust::iterator_system<Iterator>::type>
 struct choose_container;
 
 template<typename Iterator, typename ValueType>
-struct choose_container<Iterator, ValueType, thrust::device_space_tag>
+struct choose_container<Iterator, ValueType, thrust::device_system_tag>
 {
     typedef thrust::device_vector<ValueType> type;
 };
 
 template<typename Iterator, typename ValueType>
-struct choose_container<Iterator, ValueType, thrust::host_space_tag>
+struct choose_container<Iterator, ValueType, thrust::host_system_tag>
 {
     typedef thrust::host_vector<ValueType> type;
 };
